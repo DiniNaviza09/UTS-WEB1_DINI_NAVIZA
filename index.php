@@ -88,7 +88,7 @@ if (isset($_POST['login'])) {
     .btn-login:hover {
         background-color: #005dc0;
     }
-     .error {
+    .error {
         background-color: #ffe2e2;
         color: #c00;
         padding: 8px;
