@@ -1,25 +1,3 @@
-<?php
-session_start();
-$error = "";
-
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Data login statis
-    $user_valid = "admin";
-    $pass_valid = "123";
-
-    if ($username == $user_valid && $password == $pass_valid) {
-        $_SESSION['username'] = $username;
-        header("Location: dashboard.php");
-        exit();
-    } else {
-        $error = "Username atau password salah!";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -43,7 +21,7 @@ if (isset($_POST['login'])) {
         text-align: left;
     }
     h2 {
-        color: #0056d2;
+        color: #0056d2; /* Warna biru untuk POLGAN MART */
         text-align: center;
         margin-bottom: 20px;
         letter-spacing: 1px;
@@ -77,12 +55,12 @@ if (isset($_POST['login'])) {
         cursor: pointer;
     }
     .btn-login {
-        background-color: #007bff;
+        background-color: #007bff; /* Tombol login biru */
         color: white;
         font-weight: bold;
     }
     .btn-cancel {
-        background-color: #f1f1f1;
+        background-color: #f1f1f1; /* Tombol batal abu */
         color: #333;
         font-weight: bold;
     }
@@ -91,15 +69,6 @@ if (isset($_POST['login'])) {
     }
     .btn-cancel:hover {
         background-color: #e0e0e0;
-    }
-    .error {
-        background-color: #ffe2e2;
-        color: #c00;
-        padding: 8px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        text-align: center;
-        font-size: 14px;
     }
     .footer {
         margin-top: 20px;
@@ -114,18 +83,14 @@ if (isset($_POST['login'])) {
 <div class="login-container">
     <h2>POLGAN MART</h2>
 
-    <?php if($error): ?>
-        <div class="error"><?= $error; ?></div>
-    <?php endif; ?>
-
-    <form method="POST">
+    <form>
         <label for="username">Username</label>
         <input type="text" name="username" id="username" required>
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
 
-        <button type="submit" name="login" class="btn-login">Login</button>
+        <button type="submit" class="btn-login">Login</button>
         <button type="reset" class="btn-cancel">Batal</button>
     </form>
 
