@@ -1,22 +1,30 @@
 <?php
 session_start();
-$error = "";
+
+include "koneksi.php";
+
+$eror = "";
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Data login statis
-    $user_valid = "admin";
-    $pass_valid = "1234";
 
-    if ($username == $user_valid && $password == $pass_valid) {
+    $results = mysqli_query($koneksi, "select * from tbl_users WHERE username = '$username'");
+
+    // login sederhana (username: admin, password: 1234)
+    if ( $row = mysqli_fetch_assoc($results)) {
+        if ($password == $row['password']) {
         $_SESSION['username'] = $username;
+        $_SESSION['role'] = $row['role'];
         header("Location: dashboard.php");
         exit();
     } else {
-        $error = "Username atau password salah!";
+        $eror = "password salah!";
     }
+} else {
+    $eror = "Username tidak ditemukan";
+}
 }
 ?>
 <!DOCTYPE html>
@@ -113,8 +121,8 @@ if (isset($_POST['login'])) {
 <div class="login-container">
     <h2>POLGAN MART</h2>
 
-    <?php if($error): ?>
-        <div class="error"><?= $error; ?></div>
+    <?php if($eror): ?>
+        <div class="error"><?= $eror; ?></div>
     <?php endif; ?>
 
     <form method="POST">
